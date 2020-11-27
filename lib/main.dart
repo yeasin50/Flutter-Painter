@@ -49,7 +49,7 @@ class _HomepageState extends State {
         child: AlertDialog(
           title: const Text("Pick Color"),
           content: SingleChildScrollView(
-            child: BlockPicker(
+            child: ColorPicker(
               pickerColor: selectedColor,
               onColorChanged: (value) {
                 this.setState(() {
