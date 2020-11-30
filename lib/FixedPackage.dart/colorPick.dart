@@ -6,6 +6,7 @@ library hsv_picker;
 
 import 'package:flutter/material.dart';
 
+// ignore: implementation_imports
 import 'package:flutter_colorpicker/src/hsv_picker.dart';
 
 class CustomColorPicker extends StatefulWidget {
@@ -304,6 +305,7 @@ class _SlidePickerState extends State<SlidePicker> {
                   child: Text(
                     palette.toString().split('.').last[0].toUpperCase(),
                     style: widget.sliderTextStyle ??
+                        // ignore: deprecated_member_use
                         Theme.of(context).textTheme.body2.copyWith(
                             fontWeight: FontWeight.bold, fontSize: 16.0),
                   ),

@@ -2,35 +2,19 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'drawhelper/drawingArea.dart';
+import 'drawingArea.dart';
 
 class MyCustomPainter extends CustomPainter {
   List<DrawingArea> points;
-  Canvas _Canvas;
-  final recoder = new PictureRecorder();
-
+  GlobalKey key;
   MyCustomPainter({
     this.points,
+    this.key,
   });
-
-  Canvas get getCanvas {
-    return _Canvas;
-  }
-
-  get getPoints {
-    return points;
-  }
-
-  get getRecoder {
-    return recoder;
-  }
 
   @override
   void paint(Canvas canvas, Size size) {
     //save here
-
-    _Canvas = new Canvas(recoder);
-
     // main backGround
     Paint bg = Paint()..color = Colors.white;
     Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
@@ -49,7 +33,6 @@ class MyCustomPainter extends CustomPainter {
       }
     }
     //To save canvas
-    _Canvas = canvas;
   }
 
   @override
