@@ -2,10 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:paintApp/colorPick.dart';
+import 'package:paintApp/FixedPackage.dart/colorPick.dart';
+import 'package:paintApp/menu/menu.dart';
 
 import 'customPainter.dart';
-import 'drawingArea.dart';
+import 'drawhelper/drawingArea.dart';
 
 void main() {
   runApp(MyApp());
@@ -103,7 +104,7 @@ class _HomepageState extends State {
                       width: width * 0.1,
                       decoration: BoxDecoration(
                         //TODO:: change menu color
-                      
+
                         color: Colors.white54,
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
@@ -112,9 +113,12 @@ class _HomepageState extends State {
                           SizedBox(
                             height: 10,
                           ),
-                          //set of option like shape and may others 
+                          //set of option like shape and may others
                           IconButton(
-                              icon: Icon(Icons.colorize), onPressed: () {}),
+                              icon: Icon(Icons.colorize),
+                              onPressed: () {
+                                MenuItems.saveImage();
+                              }),
                         ],
                       ),
                     ),
