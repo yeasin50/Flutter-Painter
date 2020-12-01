@@ -2,13 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:paintApp/FixedPackage.dart/colorPick.dart';
-import 'package:paintApp/constants.dart';
+
+import 'package:paintApp/widget/FixedPackage.dart/constants.dart';
 import 'package:paintApp/menu/menuHandler.dart';
 import 'package:paintApp/testFile.dart';
+import 'package:paintApp/widget/FixedPackage.dart/colorPick.dart';
+import 'package:paintApp/widget/drawhelper/customPainter.dart';
+import 'package:paintApp/widget/drawhelper/drawingArea.dart';
 
-import 'drawhelper/customPainter.dart';
-import 'drawhelper/drawingArea.dart';
 import 'menu/menuHolder.dart';
 
 void main() {
@@ -83,13 +84,9 @@ class _HomepageState extends State {
     final double height = MediaQuery.of(context).size.height;
     // print(width.toString() + "height " + width.toString());
     return Scaffold(
-      // body: buildBodyStack(height, width),
-      body: TestDemo(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print("presed");
-        },
-      ),
+      resizeToAvoidBottomInset: false,
+      body: buildBodyStack(height, width),
+      // body: TestDemo(),
     );
   }
 
@@ -123,7 +120,6 @@ class _HomepageState extends State {
                     width: width * 0.1,
                     decoration: BoxDecoration(
                       //TODO:: change menu color
-
                       color: Colors.white54,
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                     ),

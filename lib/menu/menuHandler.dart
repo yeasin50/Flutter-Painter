@@ -1,15 +1,17 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:paintApp/widget/SaveDialogContent.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../constants.dart';
+import '../widget/FixedPackage.dart/constants.dart';
 
 class MenuItems {
-  static Future<void> saveImage() async {
+  static Future<void> saveImage(String imgName) async {
     final _key = Constants.globalKey;
     // checking storage permission
     if (!(await Permission.storage.status.isGranted)) {
@@ -27,7 +29,7 @@ class MenuItems {
         Uint8List.fromList(pngBytes),
         quality: 60,
         isReturnImagePathOfIOS: true,
-        name: "canvas_Img");
+        name: imgName);
     print(result.toString());
   }
 }
