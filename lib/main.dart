@@ -143,13 +143,15 @@ class _HomepageState extends State {
                     child: GestureDetector(
                       onPanUpdate: (details) {
                         this.setState(() {
-                          points.add(DrawingArea(
-                              point: details.localPosition,
-                              areaPaint: Paint()
-                                ..strokeCap = StrokeCap.round
-                                ..isAntiAlias = true
-                                ..color = selectedColor
-                                ..strokeWidth = strokeWidth));
+                          points.add(
+                            DrawingArea(
+                                point: details.localPosition,
+                                areaPaint: Paint()
+                                  ..strokeCap = StrokeCap.round
+                                  ..isAntiAlias = true
+                                  ..color = selectedColor
+                                  ..strokeWidth = strokeWidth),
+                          );
                         });
                       },
                       onPanDown: (details) {
@@ -193,12 +195,16 @@ class _HomepageState extends State {
                 ),
                 child: Row(
                   children: <Widget>[
-                    IconButton(
-                        icon: Icon(Icons.color_lens),
-                        color: selectedColor,
-                        onPressed: () {
-                          selectColor();
-                        }),
+                    Tooltip(
+                      message: "Color Selection",
+                      child: IconButton(
+                          icon: Icon(Icons.color_lens),
+                          color: selectedColor,
+                          onPressed: () {
+                            selectColor();
+                          }),
+                    ),
+                    //stroke width
                     Expanded(
                         child: Slider(
                       min: 1.0,
@@ -211,10 +217,13 @@ class _HomepageState extends State {
                         });
                       },
                     )),
-                    IconButton(
-                      icon: Icon(Icons.layers_clear),
-                      color: Colors.black,
-                      onPressed: () => setState(() => points.clear()),
+                    Tooltip(
+                      message: "Clear",
+                      child: IconButton(
+                        icon: Icon(Icons.layers_clear),
+                        color: Colors.black,
+                        onPressed: () => setState(() => points.clear()),
+                      ),
                     ),
                   ],
                 ),

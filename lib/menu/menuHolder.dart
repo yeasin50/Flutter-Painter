@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:paintApp/widget/FixedPackage.dart/constants.dart';
 import 'package:paintApp/widget/SaveDialogContent.dart';
 import 'menuHandler.dart';
 
@@ -55,7 +56,7 @@ class _MenuHolderState extends State<MenuHolder> {
                   onPressed: () {
                     if (validateName(controller.text)) {
                       log("Save Now");
-                      MenuItems.saveImage(controller.text);
+                      MenuItems.saveImage(controller.text, context);
                     }
                   },
                   child: Text(
@@ -74,19 +75,69 @@ class _MenuHolderState extends State<MenuHolder> {
         SizedBox(
           height: 10,
         ),
-        //set of option like shape and may others
-        IconButton(
-          icon: Icon(Icons.save),
-          onPressed: () => getName(context),
+        //Save pic
+        Tooltip(
+          message: "save",
+          child: IconButton(
+            icon: Icon(Icons.save),
+            onPressed: () => getName(context),
+          ),
+        ),
+        //Quality Save pic
+        Tooltip(
+          message: "Saving Quality",
+          child: IconButton(
+            icon: Icon(Icons.high_quality),
+            onPressed: () => {},
+          ),
+        ),
+        Divider(
+          thickness: 2,
+          color: Colors.black,
+          endIndent: 2,
+          indent: 2,
+        ),
+        //Strockecap
+        Tooltip(
+          message: "Star",
+          child: IconButton(
+            icon:
+                Constants.isStar ? Icon(Icons.star) : Icon(Icons.star_outline),
+            onPressed: () {
+              setState(() {
+                Constants.isStar = !Constants.isStar;
+                log(Constants.isStar.toString());
+              });
+            },
+          ),
+        ),
+        Divider(
+          thickness: 2,
+          color: Colors.black,
+          endIndent: 2,
+          indent: 2,
         ),
 
-        IconButton(icon: Icon(Icons.circle), onPressed: () {}),
-        IconButton(
-          icon: Icon(Icons.zoom_in),
-          onPressed: () {},
+        //Strockecap
+        Tooltip(
+          message: "StrokeCap",
+          child: IconButton(
+            icon: Icon(Icons.rounded_corner),
+            onPressed: () {},
+          ),
         ),
+        //anitiAlise
+        Tooltip(
+          message: "AntiAlias",
+          child: IconButton(
+            icon: Icon(Icons.clear_all_rounded),
+            onPressed: () {},
+          ),
+        ),
+        //BlandeMode
+
         IconButton(
-          icon: Icon(Icons.zoom_out),
+          icon: Icon(Icons.model_training),
           onPressed: () {},
         ),
         IconButton(

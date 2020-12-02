@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
@@ -11,7 +13,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../widget/FixedPackage.dart/constants.dart';
 
 class MenuItems {
-  static Future<void> saveImage(String imgName) async {
+  static Future<void> saveImage(String imgName, BuildContext context) async {
     final _key = Constants.globalKey;
     // checking storage permission
     if (!(await Permission.storage.status.isGranted)) {
@@ -31,5 +33,10 @@ class MenuItems {
         isReturnImagePathOfIOS: true,
         name: imgName);
     print(result.toString());
+    
+    if (result["isSuccess"]) {
+      Navigator.of(context).pop();
+      log("save loc for future uses");
+    }
   }
 }
