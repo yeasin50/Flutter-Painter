@@ -9,7 +9,9 @@ class MenuHolder extends StatefulWidget {
   @override
   _MenuHolderState createState() => _MenuHolderState();
 }
-
+// enum strokeType{
+    
+//   }
 class _MenuHolderState extends State<MenuHolder> {
   final errMsg = "Please name your Drawing before save";
   nevigateToSave() {
@@ -68,6 +70,7 @@ class _MenuHolderState extends State<MenuHolder> {
             ));
   }
 
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -99,25 +102,19 @@ class _MenuHolderState extends State<MenuHolder> {
         ),
         //Strockecap
         Tooltip(
-          message: "Star",
+          message: "BlendMode",
           child: IconButton(
             icon:
-                Constants.isStar ? Icon(Icons.star) : Icon(Icons.star_outline),
+                Constants.isAntiAlias ? Icon(Icons.star) : Icon(Icons.star_outline),
             onPressed: () {
               setState(() {
-                Constants.isStar = !Constants.isStar;
-                log(Constants.isStar.toString());
+                Constants.isAntiAlias = !Constants.isAntiAlias;
+                log(Constants.isAntiAlias.toString());
               });
             },
           ),
         ),
-        Divider(
-          thickness: 2,
-          color: Colors.black,
-          endIndent: 2,
-          indent: 2,
-        ),
-
+       
         //Strockecap
         Tooltip(
           message: "StrokeCap",
@@ -140,6 +137,14 @@ class _MenuHolderState extends State<MenuHolder> {
           icon: Icon(Icons.model_training),
           onPressed: () {},
         ),
+
+         Divider(
+          thickness: 2,
+          color: Colors.black,
+          endIndent: 2,
+          indent: 2,
+        ),
+
         IconButton(
           icon: Icon(Icons.zoom_out_map_outlined),
           onPressed: () {},
