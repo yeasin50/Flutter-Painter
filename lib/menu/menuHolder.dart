@@ -10,9 +10,7 @@ class MenuHolder extends StatefulWidget {
   @override
   _MenuHolderState createState() => _MenuHolderState();
 }
-// enum strokeType{
 
-//   }
 class _MenuHolderState extends State<MenuHolder> {
   final errMsg = "Please name your Drawing before save";
   nevigateToSave() {
@@ -74,7 +72,20 @@ class _MenuHolderState extends State<MenuHolder> {
   /// stroke cap
   /// ```
   var selectedStrokeCap = 1;
-
+  final List<Image> strokeCapimages = [
+    Image.asset(
+      "assets/images/strokeCap/butt.png",
+      fit: BoxFit.fitWidth,
+    ),
+    Image.asset(
+      "assets/images/strokeCap/round.png",
+      fit: BoxFit.fitWidth,
+    ),
+    Image.asset(
+      "assets/images/strokeCap/square.png",
+      fit: BoxFit.fitWidth,
+    ),
+  ];
   List<Icon> icons = [
     Icon(Icons.home),
     Icon(Icons.ac_unit),
@@ -83,6 +94,7 @@ class _MenuHolderState extends State<MenuHolder> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SizedBox(
           height: 10,
@@ -113,9 +125,18 @@ class _MenuHolderState extends State<MenuHolder> {
         Tooltip(
           message: "isAntiAlias",
           child: IconButton(
+            padding: EdgeInsets.all(0),
+            // iconSize: 23,
             icon: Constants.isAntiAlias
-                ? Icon(Icons.star)
-                : Icon(Icons.star_outline),
+                ? Image.asset(
+                    "assets/images/antiAlise/antiAliseOn.png",
+                    width: 40,
+                    fit: BoxFit.fitWidth,
+                  )
+                : Image.asset(
+                    "assets/images/antiAlise/antiAliseOff.png",
+                    fit: BoxFit.fitWidth,
+                  ),
             onPressed: () {
               setState(() {
                 Constants.isAntiAlias = !Constants.isAntiAlias;
@@ -131,26 +152,41 @@ class _MenuHolderState extends State<MenuHolder> {
           child: Transform.rotate(
             angle: pi / 2,
             child: DropdownButton(
+              // isExpanded: true,
+              // dropdownColor: Colors.red,
+              // isDense: true,
               iconSize: 0,
               underline: Container(),
               onChanged: (value) {
                 setState(() {
                   selectedStrokeCap = value;
+                  switch (value) {
+                    case 1:
+                      Constants.setStrokeType(StrokeCap.butt);
+                      break;
+                    case 2:
+                      Constants.setStrokeType(StrokeCap.round);
+                      break;
+                    case 3:
+                      Constants.setStrokeType(StrokeCap.square);
+                      break;
+                  }
                 });
+
                 print("Stroke Cap " + selectedStrokeCap.toString());
               },
               value: selectedStrokeCap,
               items: [
                 DropdownMenuItem(
-                  child: icons[0],
+                  child: strokeCapimages[0],
                   value: 1,
                 ),
                 DropdownMenuItem(
-                  child: icons[1],
+                  child: strokeCapimages[1],
                   value: 2,
                 ),
                 DropdownMenuItem(
-                  child: icons[2],
+                  child: strokeCapimages[2],
                   value: 3,
                 ),
               ],

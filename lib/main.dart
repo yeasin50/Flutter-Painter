@@ -147,8 +147,9 @@ class _HomepageState extends State {
                             DrawingArea(
                                 point: details.localPosition,
                                 areaPaint: Paint()
-                                  ..strokeCap = StrokeCap.round
+                                  ..strokeCap = Constants.selectedCap
                                   ..isAntiAlias = true
+                                  // ..shader =
                                   ..color = selectedColor
                                   ..strokeWidth = strokeWidth),
                           );
@@ -159,7 +160,7 @@ class _HomepageState extends State {
                           points.add(DrawingArea(
                               point: details.localPosition,
                               areaPaint: Paint()
-                                ..strokeCap = StrokeCap.round
+                                ..strokeCap = Constants.selectedCap
                                 ..isAntiAlias = true
                                 ..color = selectedColor
                                 ..strokeWidth = strokeWidth));
