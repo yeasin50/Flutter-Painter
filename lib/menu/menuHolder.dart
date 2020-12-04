@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:paintApp/widget/FixedPackage.dart/constants.dart';
@@ -10,7 +11,7 @@ class MenuHolder extends StatefulWidget {
   _MenuHolderState createState() => _MenuHolderState();
 }
 // enum strokeType{
-    
+
 //   }
 class _MenuHolderState extends State<MenuHolder> {
   final errMsg = "Please name your Drawing before save";
@@ -57,7 +58,6 @@ class _MenuHolderState extends State<MenuHolder> {
                   ),
                   onPressed: () {
                     if (validateName(controller.text)) {
-                      log("Save Now");
                       MenuItems.saveImage(controller.text, context);
                     }
                   },
@@ -70,7 +70,16 @@ class _MenuHolderState extends State<MenuHolder> {
             ));
   }
 
-  
+  /// ```
+  /// stroke cap
+  /// ```
+  var selectedStrokeCap = 1;
+
+  List<Icon> icons = [
+    Icon(Icons.home),
+    Icon(Icons.ac_unit),
+    Icon(Icons.unfold_less),
+  ];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -100,29 +109,55 @@ class _MenuHolderState extends State<MenuHolder> {
           endIndent: 2,
           indent: 2,
         ),
-        //Strockecap
+        //isAntiAlias
         Tooltip(
-          message: "BlendMode",
+          message: "isAntiAlias",
           child: IconButton(
-            icon:
-                Constants.isAntiAlias ? Icon(Icons.star) : Icon(Icons.star_outline),
+            icon: Constants.isAntiAlias
+                ? Icon(Icons.star)
+                : Icon(Icons.star_outline),
             onPressed: () {
               setState(() {
                 Constants.isAntiAlias = !Constants.isAntiAlias;
-                log(Constants.isAntiAlias.toString());
+                // log(Constants.isAntiAlias.toString());
               });
             },
           ),
         ),
-       
+
         //Strockecap
         Tooltip(
           message: "StrokeCap",
-          child: IconButton(
-            icon: Icon(Icons.rounded_corner),
-            onPressed: () {},
+          child: Transform.rotate(
+            angle: pi / 2,
+            child: DropdownButton(
+              iconSize: 0,
+              underline: Container(),
+              onChanged: (value) {
+                setState(() {
+                  selectedStrokeCap = value;
+                });
+                print("Stroke Cap " + selectedStrokeCap.toString());
+              },
+              value: selectedStrokeCap,
+              items: [
+                DropdownMenuItem(
+                  child: icons[0],
+                  value: 1,
+                ),
+                DropdownMenuItem(
+                  child: icons[1],
+                  value: 2,
+                ),
+                DropdownMenuItem(
+                  child: icons[2],
+                  value: 3,
+                ),
+              ],
+            ),
           ),
         ),
+
         //anitiAlise
         Tooltip(
           message: "AntiAlias",
@@ -138,7 +173,7 @@ class _MenuHolderState extends State<MenuHolder> {
           onPressed: () {},
         ),
 
-         Divider(
+        Divider(
           thickness: 2,
           color: Colors.black,
           endIndent: 2,

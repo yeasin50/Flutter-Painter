@@ -1,10 +1,11 @@
+import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:paintApp/strokeCapChooser.dart';
+import 'package:paintApp/test/overLayApproce.dart';
 import 'package:paintApp/widget/FixedPackage.dart/constants.dart';
 import 'package:paintApp/widget/SaveDialogContent.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -42,6 +43,14 @@ class _TestDemoState extends State<TestDemo> {
         });
   }
 
+  var selection;
+  var selectedItem = 1;
+
+  List<Icon> icons = [
+    Icon(Icons.home),
+    Icon(Icons.ac_unit),
+    Icon(Icons.unfold_less),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +59,36 @@ class _TestDemoState extends State<TestDemo> {
       ),
       // body: buildCenterSave(context),
 
-      body: StrokeCapChooser(),
+      body: Center(
+          //sideMenu SelectionBar
+          child: Transform.rotate(
+        angle: pi / 2,
+        child: DropdownButton(
+          iconSize: 0,
+          underline: Container(),
+          onChanged: (value) {
+            setState(() {
+              selection = value;
+            });
+            print(selection);
+          },
+          value: selection,
+          items: [
+            DropdownMenuItem(
+              child: icons[0],
+              value: 1,
+            ),
+            DropdownMenuItem(
+              child: icons[1],
+              value: 2,
+            ),
+            DropdownMenuItem(
+              child: icons[2],
+              value: 3,
+            ),
+          ],
+        ),
+      )),
     );
   }
 }

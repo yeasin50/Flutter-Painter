@@ -27,6 +27,7 @@ dependencies:
   flutter_colorpicker: ^0.3.4
   fluttertoast: ^7.1.5
   image_gallery_saver: ^1.6.6
+  overlay: ^0.0.1
   path_provider: ^1.6.24
   permission_handler: ^5.0.1+1
   save_in_gallery: ^0.1.3
