@@ -84,11 +84,7 @@ class _MenuHolderState extends State<MenuHolder> {
       fit: BoxFit.fitWidth,
     ),
   ];
-  List<Icon> icons = [
-    Icon(Icons.home),
-    Icon(Icons.ac_unit),
-    Icon(Icons.unfold_less),
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -107,7 +103,7 @@ class _MenuHolderState extends State<MenuHolder> {
         ),
         //Quality Save pic
         Tooltip(
-          message: "Saving Quality",
+          message: "Saving Quality max 9",
           child: FlatButton(
             child: Text(
               ((Constants.renderQuality)).toString(),
@@ -219,11 +215,6 @@ class _MenuHolderState extends State<MenuHolder> {
           color: Colors.black,
           endIndent: 2,
           indent: 2,
-        ),
-
-        IconButton(
-          icon: Icon(Icons.zoom_out_map_outlined),
-          onPressed: () {},
         ),
       ],
     );
