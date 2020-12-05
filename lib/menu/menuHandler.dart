@@ -29,11 +29,13 @@ class MenuItems {
     // FIXME:: failed to save
     final result = await ImageGallerySaver.saveImage(
         Uint8List.fromList(pngBytes),
-        quality: 60,
+        quality: Constants.renderQuality * 10 + 10,
         isReturnImagePathOfIOS: true,
         name: imgName);
-    print(result.toString());
-    
+    log("render Quality: " +
+        (Constants.renderQuality * 10 + 10).toString() +
+        result.toString());
+
     if (result["isSuccess"]) {
       Navigator.of(context).pop();
       log("save loc for future uses");

@@ -45,6 +45,7 @@ class _TestDemoState extends State<TestDemo> {
 
   var selection;
   var selectedItem = 1;
+  int count = 0;
 
   List<Icon> icons = [
     Icon(Icons.home),
@@ -61,37 +62,42 @@ class _TestDemoState extends State<TestDemo> {
 
       body: Center(
           //sideMenu SelectionBar
-          child: Transform.rotate(
-        angle: pi / 2,
-        child: DropdownButton(
-          iconSize: 0,
-          underline: Container(),
-          onChanged: (value) {
-            setState(() {
-              selection = value;
-            });
-            print(selection);
-          },
-          value: selection,
-          items: [
-            DropdownMenuItem(
-              child: icons[0],
-              value: 1,
-            ),
-            DropdownMenuItem(
-              child: icons[1],
-              value: 2,
-            ),
-            DropdownMenuItem(
-              child: icons[2],
-              value: 3,
-            ),
-          ],
+          child: Container(
+        padding: EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(width: 16.0, color: Colors.lightBlue.shade50),
+            bottom: BorderSide(width: 16.0, color: Colors.lightBlue.shade900),
+          ),
         ),
+        child: Text('Flutter in the sky', textAlign: TextAlign.center),
       )),
     );
   }
 }
+
+///```
+/// Cool looks 😋
+//  FlatButton(
+//                     shape: RoundedRectangleBorder(
+//                       borderRadius: BorderRadius.only(
+//                         // topLeft: Radius.circular(40),
+//                         topRight: Radius.circular(40),
+//                       ),
+//                       side: BorderSide(color: Colors.red, width: 7),
+//                     ),
+//                     // shape: StadiumBorder(),
+//                     color: Colors.blue,
+//                     child: Text(count.toString()),
+//                     onPressed: () {
+//                       setState(() {
+//                         if (count > 9)
+//                           count = 0;
+//                         else
+//                           count += 1;
+//                       });
+//                     },
+//                   ),
 
 // Center buildCenterPush(BuildContext context, Uint8List imgData) {
 //   return Center(

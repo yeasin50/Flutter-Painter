@@ -110,9 +110,16 @@ class _MenuHolderState extends State<MenuHolder> {
         //Quality Save pic
         Tooltip(
           message: "Saving Quality",
-          child: IconButton(
-            icon: Icon(Icons.high_quality),
-            onPressed: () => {},
+          child: FlatButton(
+            child: Text(
+              ((Constants.renderQuality)).toString(),
+              style: TextStyle(),
+            ),
+            onPressed: () => {
+              setState(() {
+                Constants.increaseRenderQuality();
+              })
+            },
           ),
         ),
         Divider(
