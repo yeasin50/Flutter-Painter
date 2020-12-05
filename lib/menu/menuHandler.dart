@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:paintApp/widget/SaveDialogContent.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../widget/FixedPackage.dart/constants.dart';

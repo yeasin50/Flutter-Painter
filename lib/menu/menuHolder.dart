@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:paintApp/widget/FixedPackage.dart/constants.dart';
 import 'package:paintApp/widget/SaveDialogContent.dart';
