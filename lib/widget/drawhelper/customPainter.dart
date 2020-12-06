@@ -20,7 +20,10 @@ class MyCustomPainter extends CustomPainter {
     Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
     canvas.drawRect(rect, bg);
 
-    // we are checking if there is just one click
+    // imageInsertion
+    // canvas.drawImage(
+    //  , Offset.zero, Paint());
+    // // we are checking if there is just one click
     for (int x = 0; x < points.length - 1; x++) {
       if (points[x] != null && points[x + 1] != null) {
         canvas.drawLine(

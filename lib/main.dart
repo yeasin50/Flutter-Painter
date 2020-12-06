@@ -7,6 +7,7 @@ import 'package:paintApp/widget/FixedPackage.dart/constants.dart';
 import 'package:paintApp/menu/menuHandler.dart';
 import 'package:paintApp/testFile.dart';
 import 'package:paintApp/widget/FixedPackage.dart/colorPick.dart';
+import 'package:paintApp/widget/FixedPackage.dart/shapeSelection.dart';
 import 'package:paintApp/widget/drawhelper/customPainter.dart';
 import 'package:paintApp/widget/drawhelper/drawingArea.dart';
 
@@ -65,6 +66,7 @@ class _HomepageState extends State {
               onColorChanged: (value) {
                 this.setState(() {
                   selectedColor = value;
+                  Shapes.selectedColor = value;
                 });
               },
             ),
@@ -150,6 +152,7 @@ class _HomepageState extends State {
                                   ..strokeCap = Constants.selectedCap
                                   ..isAntiAlias = true
                                   // ..shader =
+                                  // ..blendMode = BlendMode.luminosity
                                   ..color = selectedColor
                                   ..strokeWidth = strokeWidth),
                           );

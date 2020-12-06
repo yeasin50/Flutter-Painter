@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:paintApp/widget/FixedPackage.dart/constants.dart';
+import 'package:paintApp/widget/FixedPackage.dart/shapeSelection.dart';
 import 'package:paintApp/widget/SaveDialogContent.dart';
 import 'menuHandler.dart';
 
@@ -195,12 +196,39 @@ class _MenuHolderState extends State<MenuHolder> {
           ),
         ),
 
-        //anitiAlise
+        //shape
         Tooltip(
-          message: "AntiAlias",
-          child: IconButton(
-            icon: Icon(Icons.clear_all_rounded),
-            onPressed: () {},
+          message: "Shape",
+          child: Container(
+            color: Shapes.isRectangale ? Colors.lightBlueAccent : null,
+            margin: EdgeInsets.all(4),
+            child: FlatButton(
+              child: SizedBox(),
+              shape: RoundedRectangleBorder(
+                // borderRadius: BorderRadius.only(topLeft: Radius.elliptical(0, 0)),
+                side: BorderSide(
+                  color: Shapes.selectedColor,
+                  width: 3,
+                ),
+              ),
+              color: Shapes.fillShape && Shapes.isRectangale
+                  ? Shapes.selectedColor
+                  : Colors.white.withAlpha(24),
+              onPressed: () {
+                if (!Shapes.isRectangale)
+                  setState(() => Shapes.isRectangale = true);
+                else if (Shapes.fillShape)
+                  setState(() {
+                    Shapes.fillShape = false;
+                    Shapes.isRectangale = false;
+                  });
+                else if (Shapes.isRectangale) {
+                  setState(() {
+                    Shapes.fillShape = true;
+                  });
+                }
+              },
+            ),
           ),
         ),
         //BlandeMode
