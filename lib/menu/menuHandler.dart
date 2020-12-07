@@ -7,13 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:paintApp/provider/dataProvider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 
 import '../widget/FixedPackage.dart/constants.dart';
 
 class MenuItems {
   static Future<void> saveImage(String imgName, BuildContext context) async {
-    final _key = Constants.globalKey;
+    final provider = Provider.of<BasicDB>(context);
+    final _key = Const.globalKeyOfSaving;
     // checking storage permission
     if (!(await Permission.storage.status.isGranted)) {
       await Permission.storage.request();
@@ -28,11 +31,11 @@ class MenuItems {
     // FIXME:: failed to save
     final result = await ImageGallerySaver.saveImage(
         Uint8List.fromList(pngBytes),
-        quality: Constants.renderQuality * 10 + 10,
+        quality: provider.renderQuality * 10 + 10,
         isReturnImagePathOfIOS: true,
         name: imgName);
     log("render Quality: " +
-        (Constants.renderQuality * 10 + 10).toString() +
+        (provider.renderQuality * 10 + 10).toString() +
         result.toString());
 
     if (result["isSuccess"]) {

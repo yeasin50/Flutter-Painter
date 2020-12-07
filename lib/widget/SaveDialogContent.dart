@@ -3,15 +3,15 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:paintApp/provider/dataProvider.dart';
 import 'package:paintApp/widget/FixedPackage.dart/constants.dart';
 import 'package:permission_handler/permission_handler.dart';
-
+import 'package:provider/provider.dart';
 
 //TODO:: checking img from cache memory
 //FIXME:: load img  and show a preview of Uint8List
 class FullScreenDialog extends StatefulWidget {
   String _skillOne = "You have";
-  Uint8List drawing;
   // FullScreenDialog(this.drawing);
 
   @override
@@ -23,32 +23,32 @@ class FullScreenDialogState extends State<FullScreenDialog> {
 
   @override
   void initState() {
-    widget.drawing = Constants.tempImg;
     super.initState();
   }
 
-  static Future<void> saveImage() async {
-    final _key = Constants.globalKey;
-    // checking storage permission
-    if (!(await Permission.storage.status.isGranted)) {
-      await Permission.storage.request();
-    }
-    // print("Save called");
-    RenderRepaintBoundary boundary = _key.currentContext.findRenderObject();
+  // static Future<void> saveImage() async {
+  //   final provider = Provider<BasicDB>.of(context).
+  //   // final _key = Provider<BasicDB>;
+  //   // checking storage permission
+  //   if (!(await Permission.storage.status.isGranted)) {
+  //     await Permission.storage.request();
+  //   }
+  //   // print("Save called");
+  //   RenderRepaintBoundary boundary = _key.currentContext.findRenderObject();
 
-    ui.Image image = await boundary.toImage();
-    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    Uint8List pngBytes = byteData.buffer.asUint8List();
-    // print("empty File " + pngBytes.isEmpty.toString());
-    // TODO:: Done
-    final result = await ImageGallerySaver.saveImage(
-        Uint8List.fromList(pngBytes),
-        quality: 60,
-        isReturnImagePathOfIOS: true,
-        name: "canvas_Img");
-        
-    print(result.toString());
-  }
+  //   ui.Image image = await boundary.toImage();
+  //   ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+  //   Uint8List pngBytes = byteData.buffer.asUint8List();
+  //   // print("empty File " + pngBytes.isEmpty.toString());
+  //   // TODO:: Done
+  //   final result = await ImageGallerySaver.saveImage(
+  //       Uint8List.fromList(pngBytes),
+  //       quality: 60,
+  //       isReturnImagePathOfIOS: true,
+  //       name: "canvas_Img");
+
+  //   print(result.toString());
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -63,15 +63,15 @@ class FullScreenDialogState extends State<FullScreenDialog> {
               SizedBox(
                 height: 10,
               ),
-              //TODO:: preview Image before saving 
-              FutureBuilder<Uint8List>(
-                future: saveImage(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    Image.memory(snapshot.data);
-                  }
-                },
-              ),
+              //TODO:: preview Image before saving
+              // FutureBuilder<Uint8List>(
+              //   future: saveImage(),
+              //   builder: (context, snapshot) {
+              //     if (snapshot.hasData) {
+              //       Image.memory(snapshot.data);
+              //     }
+              //   },
+              // ),
 
               new TextField(
                 controller: _skillOneController,
