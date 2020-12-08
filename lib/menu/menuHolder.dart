@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:paintApp/provider/dataProvider.dart';
-import 'package:paintApp/widget/FixedPackage.dart/constants.dart';
+import 'package:paintApp/menu/constants.dart';
 import 'package:paintApp/provider/shapeSelection.dart';
 import 'package:paintApp/widget/SaveDialogContent.dart';
 import 'package:provider/provider.dart';
@@ -33,9 +33,11 @@ class _MenuHolderState extends State<MenuHolder> {
 
   void getName(BuildContext context) {
     TextEditingController controller = new TextEditingController();
+
+    final provider = Provider.of<BasicDB>(context, listen: false);
     showDialog(
         context: context,
-        builder: (_) => AlertDialog(
+        builder: (ctx) => AlertDialog(
               title: Text("File Name"),
               content: TextFormField(
                 controller: controller,
@@ -49,7 +51,6 @@ class _MenuHolderState extends State<MenuHolder> {
                     onPressed: () => Navigator.of(context).pop(),
                     child: Text("Cancel")),
                 FlatButton(
-                  // onPressed: () => MenuItems.saveImage(),
                   color: Colors.deepOrangeAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
@@ -57,7 +58,8 @@ class _MenuHolderState extends State<MenuHolder> {
                   ),
                   onPressed: () {
                     if (validateName(controller.text)) {
-                      MenuItems.saveImage(controller.text, context);
+                      //save
+                      provider.saveDrawing(controller.text.toString(), context);
                     }
                   },
                   child: Text(
@@ -88,13 +90,12 @@ class _MenuHolderState extends State<MenuHolder> {
     ),
   ];
 
-  
-  Icon get getCap{
+  Icon get getCap {
     return Icon(Icons.ac_unit_outlined);
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Consumer2<BasicDB, Shapes>(
       builder: (context, data, shapes, child) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -163,10 +164,11 @@ class _MenuHolderState extends State<MenuHolder> {
               // isExpanded: true,
               // dropdownColor: Colors.red,
               onTap: () {
+                data.changeStrokeCap();
                 setState(() {});
                 print("Stroke Cap " + selectedStrokeCap.toString());
               },
-              child: Icon(Icons.ac_unit),
+              child: buildStrokeCapLogo(data.strokeCap),
             ),
           ),
 
@@ -222,5 +224,11 @@ class _MenuHolderState extends State<MenuHolder> {
         ],
       ),
     );
+  }
+
+  Icon buildStrokeCapLogo(StrokeCap data) {
+    if (data == StrokeCap.round) return Icon(Icons.circle);
+    if (data == StrokeCap.square) return Icon(Icons.square_foot);
+    if (data == StrokeCap.butt) return Icon(Icons.sanitizer);
   }
 }

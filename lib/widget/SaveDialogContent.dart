@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:paintApp/provider/dataProvider.dart';
-import 'package:paintApp/widget/FixedPackage.dart/constants.dart';
+import 'package:paintApp/menu/constants.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 

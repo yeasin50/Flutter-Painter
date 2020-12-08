@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paintApp/menu/constants.dart';
 import 'package:paintApp/menu/menuHolder.dart';
 import 'package:paintApp/provider/dataProvider.dart';
 import 'package:paintApp/provider/shapeSelection.dart';
@@ -18,7 +19,7 @@ class _HomepageState extends State {
   double strokeWidth;
 
   ///for save
-  static GlobalKey globalKeyToSave = GlobalKey();
+  // static GlobalKey globalKeyToSave = GlobalKey();
 
   @override
   void initState() {
@@ -30,7 +31,6 @@ class _HomepageState extends State {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Const.globalKeyOfSaving = GlobalKey();
   }
 
   //ColorPicker
@@ -110,8 +110,8 @@ class _HomepageState extends State {
                   ),
 
                   ///art Panel
-                  Consumer<Shapes>(
-                    builder: (context, data, child) => Container(
+                  Consumer2<BasicDB, Shapes>(
+                    builder: (context, data, shape, child) => Container(
                       width: width * 0.85,
                       height: height * 0.80,
                       decoration: BoxDecoration(
@@ -124,47 +124,44 @@ class _HomepageState extends State {
                           )
                         ],
                       ),
-                      child: Consumer<BasicDB>(
-                        builder: (context, data, child) => GestureDetector(
-                          onPanUpdate: (details) {
-                            this.setState(() {
-                              points.add(
-                                DrawingArea(
-                                    point: details.localPosition,
-                                    areaPaint: Paint()
-                                      // ..strokeCap = data.selectedCap
-                                      ..isAntiAlias = data.isAntiAlias
-                                      // ..shader =
-                                      // ..blendMode = BlendMode.luminosity
-                                      ..color = selectedColor
-                                      ..strokeWidth = strokeWidth),
-                              );
-                            });
-                          },
-                          onPanDown: (details) {
-                            this.setState(() {
-                              points.add(DrawingArea(
+                      child: GestureDetector(
+                        onPanUpdate: (details) {
+                          this.setState(() {
+                            points.add(
+                              DrawingArea(
                                   point: details.localPosition,
                                   areaPaint: Paint()
                                     ..strokeCap = data.strokeCap
                                     ..isAntiAlias = data.isAntiAlias
+                                    // ..shader =
+                                    // ..blendMode = BlendMode.luminosity
                                     ..color = selectedColor
-                                    ..strokeWidth = strokeWidth));
-                            });
-                          },
-                          onPanEnd: (details) {
-                            points.add(null);
-                          },
-                          child: RepaintBoundary(
-                            //FIXME:: key issue while saving 
-                            key: Const.globalKeyOfSaving,
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              child: CustomPaint(
-                                painter: MyCustomPainter(
-                                    points: points, key: globalKeyToSave),
-                              ),
+                                    ..strokeWidth = strokeWidth),
+                            );
+                          });
+                        },
+                        onPanDown: (details) {
+                          this.setState(() {
+                            points.add(DrawingArea(
+                                point: details.localPosition,
+                                areaPaint: Paint()
+                                  ..strokeCap = data.strokeCap
+                                  ..isAntiAlias = data.isAntiAlias
+                                  ..color = selectedColor
+                                  ..strokeWidth = strokeWidth));
+                          });
+                        },
+                        onPanEnd: (details) {
+                          points.add(null);
+                        },
+                        child: RepaintBoundary(
+                          //FIXME:: key issue while saving
+                          key: Constants.globalKey,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            child: CustomPaint(
+                              painter: MyCustomPainter(
+                                  points: points, key: Constants.globalKey),
                             ),
                           ),
                         ),

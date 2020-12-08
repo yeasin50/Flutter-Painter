@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:paintApp/test/overLayApproce.dart';
-import 'package:paintApp/widget/FixedPackage.dart/constants.dart';
+import 'package:paintApp/menu/constants.dart';
 import 'package:paintApp/widget/SaveDialogContent.dart';
 import 'package:permission_handler/permission_handler.dart';
 

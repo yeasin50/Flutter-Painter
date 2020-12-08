@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
-  // static GlobalKey globalKey; 
+  static GlobalKey globalKey; 
   // static bool isAntiAlias = false;
   // static StrokeCap selectedCap = StrokeCap.round;
   // static int renderQuality = 6;
