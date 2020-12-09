@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:paintApp/provider/dataProvider.dart';
@@ -34,7 +35,6 @@ class _MenuHolderState extends State<MenuHolder> {
   void getName(BuildContext context) {
     TextEditingController controller = new TextEditingController();
 
-    final provider = Provider.of<BasicDB>(context, listen: false);
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -59,7 +59,9 @@ class _MenuHolderState extends State<MenuHolder> {
                   onPressed: () {
                     if (validateName(controller.text)) {
                       //save
-                      provider.saveDrawing(controller.text.toString(), context);
+                      Constants.saveDrawing(controller.text);
+                    } else {
+                      print("failed on nameValidation");
                     }
                   },
                   child: Text(
@@ -90,9 +92,9 @@ class _MenuHolderState extends State<MenuHolder> {
     ),
   ];
 
-  Icon get getCap {
-    return Icon(Icons.ac_unit_outlined);
-  }
+  // Icon get getCap {
+  //   return Icon(Icons.ac_unit_outlined);
+  // }
 
   @override
   Widget build(BuildContext context) {

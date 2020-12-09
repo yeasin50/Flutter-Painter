@@ -30,6 +30,7 @@ class _HomepageState extends State {
 
   @override
   void didChangeDependencies() {
+    Constants.globalKey = GlobalKey();
     super.didChangeDependencies();
   }
 
